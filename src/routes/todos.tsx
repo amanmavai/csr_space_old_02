@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type ITodo = {
+type Todo = {
   id: number;
   text: string;
   completed: boolean;
@@ -75,7 +75,7 @@ function TodoItem({
   onUpdate,
   onDelete,
 }: {
-  todo: ITodo;
+  todo: Todo;
   onToggle: (id: number) => void;
   onUpdate: (id: number, text: string) => void;
   onDelete: (id: number) => void;
