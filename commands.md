@@ -11,5 +11,8 @@ npx tailwindcss init -p
 # prettier-plugin-tailwindcss
 npm install -D prettier-plugin-tailwindcss
 
+# react-router-dom
+npm install react-router-dom
+
 
 ```
