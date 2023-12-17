@@ -1,5 +1,5 @@
-import { RouterProvider, createBrowserRouter, Link } from "react-router-dom";
 import Root from "./routes/root";
+import { RouterProvider, createBrowserRouter, Link } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +10,10 @@ const router = createBrowserRouter([
       {
         path: "hooks-flow",
         lazy: () => import("./routes/hooks_flow"),
+      },
+      {
+        path: "todos",
+        lazy: () => import("./routes/todos"),
       },
     ],
   },
@@ -28,10 +32,10 @@ export default App;
 
 function NoMatch() {
   return (
-    <div className="text-lg p-4 flex flex-col gap-4 items-center">
+    <div className="flex  flex-col items-center gap-4 p-4 text-lg">
       <h2 className="text-orange-500">Nothing to see here!</h2>
       <p>
-        <Link to="/" className="text-blue-400 text-3xl">
+        <Link to="/" className="text-3xl text-blue-400">
           Back to Home Page
         </Link>
       </p>
@@ -41,7 +45,7 @@ function NoMatch() {
 
 function Home() {
   return (
-    <div className="justify-center flex text-3xl text-green-500">
+    <div className="flex justify-center text-3xl text-green-500">
       <h2>Home</h2>
     </div>
   );
