@@ -8,5 +8,8 @@ npm install -D prettier
 npm install -D tailwindcss postcss postcss-import autoprefixer
 npx tailwindcss init -p
 
+# prettier-plugin-tailwindcss
+npm install -D prettier-plugin-tailwindcss
+
 
 ```
