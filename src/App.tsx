@@ -1,4 +1,3 @@
-import { Text } from "./components/shared_components";
 import Root from "./routes/root";
 import { RouterProvider, createBrowserRouter, Link } from "react-router-dom";
 
@@ -24,16 +23,49 @@ const router = createBrowserRouter([
         path: "infinite-scroll",
         lazy: () => import("./routes/infinite_scroll"),
       },
-    ],
-  },
-  {
-    path: "/contacts",
-    element: <Root />,
-    children: [
-      { index: true, element: <Text>Contacts List</Text> },
-      { path: ":contactId", element: <Text>View Contact</Text> },
-      { path: ":contactId/edit", element: <Text>Edit Contact</Text> },
-      { path: ":contactId/destroy", element: <Text>Destroy Contact</Text> },
+      {
+        path: "contacts",
+        async lazy() {
+          let { Layout } = await import("./routes/contacts");
+          return { Component: Layout };
+        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              let { Index } = await import("./routes/contacts");
+              return { Component: Index };
+            },
+          },
+          {
+            path: ":contactId",
+            async lazy() {
+              let { ViewContact } = await import("./routes/contacts");
+              return {
+                Component: ViewContact,
+              };
+            },
+          },
+          {
+            path: ":contactId/edit",
+            async lazy() {
+              let { EditContact } = await import("./routes/contacts");
+              return {
+                Component: EditContact,
+              };
+            },
+          },
+          {
+            path: ":contactId/destroy",
+            async lazy() {
+              let { DestroyContact } = await import("./routes/contacts");
+              return {
+                Component: DestroyContact,
+              };
+            },
+          },
+        ],
+      },
     ],
   },
   {
