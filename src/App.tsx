@@ -20,6 +20,10 @@ const router = createBrowserRouter([
         path: "traffic-light",
         lazy: () => import("./routes/traffic_light"),
       },
+      {
+        path: "infinite-scroll",
+        lazy: () => import("./routes/infinite_scroll"),
+      },
     ],
   },
   {
