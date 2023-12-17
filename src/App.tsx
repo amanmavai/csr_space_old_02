@@ -18,6 +18,16 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/contacts",
+    element: <Root />,
+    children: [
+      { index: true, element: <div>Contacts List</div> },
+      { path: ":contactId", element: <div>View Contact</div> },
+      { path: ":contactId/edit", element: <div>Edit Contact</div> },
+      { path: ":contactId/destroy", element: <div>Destroy Contact</div> },
+    ],
+  },
+  {
     path: "*",
     element: <NoMatch />,
   },
