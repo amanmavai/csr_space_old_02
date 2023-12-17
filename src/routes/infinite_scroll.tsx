@@ -1,7 +1,18 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
-const useInfiniteScroll = (scrollableRef, loadMore) => {
-  const isInitialLoad = useRef(true);
+type User = {
+  id: number;
+  login: string;
+  avatar_url: string;
+};
+
+type InfiniteScrollHookProps = {
+  scrollableRef: React.RefObject<HTMLDivElement>;
+  loadMore: () => void;
+};
+
+const useInfiniteScroll = ({ scrollableRef, loadMore }: InfiniteScrollHookProps) => {
+  const isInitialLoad = useRef<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,11 +54,11 @@ const useInfiniteScroll = (scrollableRef, loadMore) => {
 };
 
 export function Component() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [lastUserId, setLastUserId] = useState(0);
-  const scrollableRef = useRef(null);
+  const [items, setItems] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [lastUserId, setLastUserId] = useState<number>(0);
+  const scrollableRef = useRef<HTMLDivElement>(null);
 
   const fetchData = useCallback(async () => {
     if (loading) return; // Prevent multiple fetches when already loading
@@ -68,13 +79,13 @@ export function Component() {
         setLastUserId(data[data.length - 1].id);
       }
     } catch (err) {
-      setError(err);
+      setError(err instanceof Error ? err : new Error("Error occurred"));
     } finally {
       setLoading(false);
     }
   }, [lastUserId, loading]);
 
-  useInfiniteScroll(scrollableRef, fetchData);
+  useInfiniteScroll({ scrollableRef, loadMore: fetchData });
 
   return (
     <div
