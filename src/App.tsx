@@ -1,3 +1,4 @@
+import { Text } from "./components/shared_components";
 import Root from "./routes/root";
 import { RouterProvider, createBrowserRouter, Link } from "react-router-dom";
 
@@ -21,10 +22,10 @@ const router = createBrowserRouter([
     path: "/contacts",
     element: <Root />,
     children: [
-      { index: true, element: <div>Contacts List</div> },
-      { path: ":contactId", element: <div>View Contact</div> },
-      { path: ":contactId/edit", element: <div>Edit Contact</div> },
-      { path: ":contactId/destroy", element: <div>Destroy Contact</div> },
+      { index: true, element: <Text>Contacts List</Text> },
+      { path: ":contactId", element: <Text>View Contact</Text> },
+      { path: ":contactId/edit", element: <Text>Edit Contact</Text> },
+      { path: ":contactId/destroy", element: <Text>Destroy Contact</Text> },
     ],
   },
   {
