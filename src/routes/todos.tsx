@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 
+type ITodo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
 export function Component() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Read about ViteJS", completed: false },
   ]);
 
-  function onAddTodo(text) {
+  function onAddTodo(text: string) {
     const newTodo = { id: Date.now(), text, completed: false };
     setTodos([...todos, newTodo]);
   }
 
-  function deleteTodo(id) {
+  function deleteTodo(id: number) {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
-  function toggleTodo(id) {
+  function toggleTodo(id: number) {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -26,7 +32,7 @@ export function Component() {
     );
   }
 
-  function updateTodo(id, newText) {
+  function updateTodo(id: number, newText: string) {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -38,7 +44,7 @@ export function Component() {
   }
 
   const [addText, setAddText] = React.useState("");
-  function handleAddText(e) {
+  function handleAddText(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && addText.trim() !== "") {
       onAddTodo(addText);
       setAddText("");
@@ -49,7 +55,7 @@ export function Component() {
       <input
         placeholder="Add todo..."
         type="text"
-        className="border border-solid border-green-300 text-3xl"
+        className="mt-4 w-72 border border-solid border-green-300 p-2 text-3xl"
         value={addText}
         onChange={(e) => setAddText(e.target.value)}
         onKeyDown={handleAddText}
@@ -63,7 +69,17 @@ export function Component() {
   );
 }
 
-function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
+function TodoItem({
+  todo,
+  onToggle,
+  onUpdate,
+  onDelete,
+}: {
+  todo: ITodo;
+  onToggle: (id: number) => void;
+  onUpdate: (id: number, text: string) => void;
+  onDelete: (id: number) => void;
+}) {
   const [isEditing, setIsEditing] = React.useState(false);
 
   return (
