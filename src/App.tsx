@@ -16,6 +16,10 @@ const router = createBrowserRouter([
         path: "todos",
         lazy: () => import("./routes/todos"),
       },
+      {
+        path: "traffic-light",
+        lazy: () => import("./routes/traffic_light"),
+      },
     ],
   },
   {
